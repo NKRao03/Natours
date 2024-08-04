@@ -43,6 +43,7 @@ const createTour = (req: Request, res: Response, next: NextFunction) => {
     (err) => {
       res.status(201).json({
         status: 'Success',
+        length: tours.length,
         data: {
           tour: newTour,
         },
@@ -77,13 +78,20 @@ const deleteTour = (req: Request, res: Response, next: NextFunction) => {
       if (tour === undefined || tour === null || tour.length === 0) {
         throw new Error();
       }
-      tours.filter((t:any) => t.id !== tour.id)
-      res.status(201).json({
-        status: 'Success',
-        data: {
-          tour,
-        },
-      });
+      tours = tours.filter((t:any) => t.id !== tour.id);
+      fs.writeFile(
+        `${__dirname}/../dev-data/data/tours-simple.json`,
+        JSON.stringify(tours),
+        (err) => {
+          res.status(201).json({
+            status: 'Success',
+            length: tours.length,
+            data: {
+              tour,
+            },
+          });
+        }
+      );
     } catch (e) {
       res.status(404).json({
         status: 'Fail',
