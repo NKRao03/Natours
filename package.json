@@ -12,6 +12,7 @@
     "pnpm": "^9.6.0"
   },
   "scripts": {
-    "start": "npx nodemon"
+    "start": "npx nodemon",
+    "start:prod": "SET NODE_ENV=production&&npx nodemon"
   }
 }
