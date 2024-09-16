@@ -5,7 +5,6 @@ import app from "./app";
 
 const options = {
   dbName: "natours", 
-  useNewUrlParser: true, 
 }
 mongoose.connect(process.env.CONNECTION_STRING!, options)
 .then((res) => {
